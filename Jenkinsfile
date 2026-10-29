@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Source code checked out from GitHub'
+                echo "Building Chat App branch: ${env.BRANCH_NAME ?: 'V1'}"
             }
         }
 
@@ -28,7 +28,7 @@ pipeline {
 
     post {
         success {
-            echo 'Chat App V1 build completed successfully!'
+            echo 'Chat App build and tests completed successfully!'
         }
         failure {
             echo 'Build failed. Check the console output.'
