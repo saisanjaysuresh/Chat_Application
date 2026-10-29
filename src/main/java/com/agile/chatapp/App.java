@@ -11,12 +11,13 @@ public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== Chat App V2: View Messages ===");
+        System.out.println("=== Chat App V3: Delete Messages ===");
 
         while (true) {
             System.out.println("\n1. Send Message");
             System.out.println("2. View Messages");
-            System.out.println("3. Exit");
+            System.out.println("3. Delete Message");
+            System.out.println("4. Exit");
             System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();
@@ -46,6 +47,33 @@ public class App {
                     break;
 
                 case "3":
+                    if (messages.isEmpty()) {
+                        System.out.println("No messages available to delete.");
+                    } else {
+                        System.out.println("\n--- All Messages ---");
+                        for (int i = 0; i < messages.size(); i++) {
+                            System.out.println((i + 1) + ". " + messages.get(i));
+                        }
+
+                        System.out.print("Enter message number to delete: ");
+                        String input = scanner.nextLine();
+
+                        try {
+                            int number = Integer.parseInt(input);
+
+                            if (number >= 1 && number <= messages.size()) {
+                                messages.remove(number - 1);
+                                System.out.println("Message deleted successfully!");
+                            } else {
+                                System.out.println("Invalid message number.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Please enter a valid number.");
+                        }
+                    }
+                    break;
+
+                case "4":
                     System.out.println("Chat App closed.");
                     scanner.close();
                     return;
